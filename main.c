@@ -31,7 +31,7 @@ static void serial_start(void)
 	    0,
 	};
 
-	sdStart(&SD3, &ser_cfg); // UART3.
+	//sdStart(&SD3, &ser_cfg); // UART3.
 }
 
 static void timer12_start(void){

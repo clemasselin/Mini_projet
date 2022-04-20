@@ -17,6 +17,9 @@ WARNING : Not on the same port !!
 //#define FRONT_LED	GPIOD, 14
 #define BODY_LED	GPIOB, 2
 
+//define pin od distance sensor
+#define DEVICE     	GPIOA, 10
+
 //constants for the differents parts of the TP4
 #define IMAGE_BUFFER_SIZE		640
 #define WIDTH_SLOPE				5

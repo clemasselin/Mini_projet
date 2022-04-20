@@ -11,10 +11,16 @@
 #include <motors.h>
 #include <camera/po8030.h>
 #include <chprintf.h>
-
+#include <sensors/VL53L0X/VL53L0X.h>
 #include <pi_regulator.h>
 #include <process_image.h>
+#include <sign_detection.h>
+#include <msgbus/messagebus.h>
+#include <i2c_bus.h>
 
+messagebus_t bus;
+MUTEX_DECL(bus_lock);
+CONDVAR_DECL(bus_condvar);
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size)
 {
@@ -35,11 +41,16 @@ static void serial_start(void)
 	sdStart(&SD3, &ser_cfg); // UART3.
 }
 
+int distance(uint16_t dist_mm)
+{
+	VL53L0X_start();
+	dist_mm = VL53L0X_get_dist_mm();
+	return dist_mm;
+}
+
+
 int main(void)
 {
-	int speed = 900;
-
-
     halInit();
     chSysInit();
     mpu_init();
@@ -54,9 +65,23 @@ int main(void)
 	//inits the motors
 	motors_init();
 
+	/** Inits the Inter Process Communication bus. */
+	messagebus_init(&bus, &bus_lock, &bus_condvar);
+
+	// start the i2c
+	 i2c_start();
+
+	//init the distance sensor
+	//VL53L0X_init(VL53L0X_DEV);
+	//set the accuracy mode
+	//VL53L0X_configAccuracy(VL53L0X_DEV, VL53L0X_DEFAULT_MODE);
+
 	//stars the threads for the pi regulator and the processing of the image
 	//pi_regulator_start();
 	//process_image_start();
+
+	//stars the threads for the distance sensor (TOF)
+	sign_detection_start();
 
 
 
@@ -64,8 +89,7 @@ int main(void)
     while (1) {
     	//waits 1 second
         //chThdSleepMilliseconds(1000);
-    	left_motor_set_speed(speed);
-    	right_motor_set_speed(speed);
+
     }
 }
 

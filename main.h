@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-/* LEDs that can be used in this TP1
+/* LEDs that can be used
   LED1 			: GPIOD pin 5
   LED3 			: GPIOD pin 6
   LED5 			: GPIOD pin 10
@@ -17,8 +17,6 @@ WARNING : Not on the same port !!
 //#define FRONT_LED	GPIOD, 14
 #define BODY_LED	GPIOB, 2
 
-//define pin od distance sensor
-#define DEVICE     	GPIOA, 10
 
 //constants for the differents parts of the TP4
 #define IMAGE_BUFFER_SIZE		640

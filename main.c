@@ -12,6 +12,7 @@
 #include <sign_detection.h>
 #include <msgbus/messagebus.h>
 
+
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
@@ -29,7 +30,7 @@ int main(void)
 	/* Inits the Inter Process Communication bus. */
 	messagebus_init(&bus, &bus_lock, &bus_condvar);
 
-	/* stars the threads for the detection of signs and the reaction of
+	/* start the threads for the detection of signs and the reaction of
 	the robot in consequences with the distance sensor (IR). */
 	sign_detection_start();
 

@@ -11,6 +11,7 @@
 #include <motors.h>
 #include <sign_detection.h>
 #include <msgbus/messagebus.h>
+#include <spi_comm.h>
 
 
 messagebus_t bus;
@@ -23,6 +24,9 @@ int main(void)
     halInit();
     chSysInit();
     mpu_init();
+
+    /* inits the spi communication bus. */
+    spi_comm_start();
 
     /* inits the motors. */
 	motors_init();

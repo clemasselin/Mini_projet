@@ -37,15 +37,16 @@ static THD_FUNCTION(SignDetection, arg) {
 
         /* 0 set as the reference at the calibration so need to turn
          * on the robot with a sign as far as we want it to stop*/
-        if (get_calibrated_prox(1) > 0) {
+        if (get_calibrated_prox(1) > 1) {
 
         	speed = 0 ;
 
         	/* start the selection of reactions of the robot*/
+        	//warning_rgb();
         	warning();
 
-        	/* waits 0.5 second */
-        	chThdSleepMilliseconds(500);
+        	/* waits 0.1 second */
+        	chThdSleepMilliseconds(100);
 
         } else {
 
@@ -60,6 +61,7 @@ static THD_FUNCTION(SignDetection, arg) {
         if(speed > 10){
 
         	/* Turn off all leds*/
+        	//clear_leds_rgb();
         	clear_leds();
         }
 

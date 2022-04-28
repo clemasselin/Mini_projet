@@ -1,8 +1,17 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include "camera/dcmi_camera.h"
+#include "msgbus/messagebus.h"
+#include "parameter/parameter.h"
 
+#define IMAGE_BUFFER_SIZE		640
+#define WIDTH_SLOPE				5
+#define ROTATION_THRESHOLD		5
+#define ROTATION_COEFF			2
+#define DEFAULT_SPEED			300
 void delay(unsigned int n);
+void SendUint8ToComputer(uint8_t* data, uint16_t size);
 
 #ifdef __cplusplus
 extern "C" {

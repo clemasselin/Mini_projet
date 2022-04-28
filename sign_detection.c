@@ -46,5 +46,5 @@ static THD_FUNCTION(SignDetection, arg) {
 }
 
 void sign_detection_start(void){
-	chThdCreateStatic(waSignDetection, sizeof(waSignDetection), NORMALPRIO, SignDetection, NULL);
+	chThdCreateStatic(waSignDetection, sizeof(waSignDetection), NORMALPRIO+1, SignDetection, NULL);
 }

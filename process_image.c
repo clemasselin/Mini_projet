@@ -151,9 +151,9 @@ static THD_FUNCTION(ProcessImage, arg) {
 		lineWidth = extract_line_width(image);
 
 		//converts the width into a distance between the robot and the camera
-		if(lineWidth){
-			distance_cm = PXTOCM/lineWidth;
-		}
+		//if(lineWidth){
+		//	distance_cm = PXTOCM/lineWidth;
+		//}
 
 		if(send_to_computer){
 			//sends to the computer the image

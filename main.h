@@ -6,6 +6,10 @@
 #include "parameter/parameter.h"
 
 #define IMAGE_BUFFER_SIZE		640
+#define MAX_DISTANCE 			25.0f
+#define PXTOCM					1570.0f
+#define GOAL_DISTANCE 			10.0f
+#define MIN_LINE_WIDTH			40
 #define WIDTH_SLOPE				5
 #define ROTATION_THRESHOLD		5
 #define ROTATION_COEFF			2

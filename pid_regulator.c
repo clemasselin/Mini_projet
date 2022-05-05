@@ -1,3 +1,4 @@
+#include <assess_environment.h>
 #include "ch.h"
 #include "hal.h"
 #include <math.h>
@@ -8,7 +9,6 @@
 
 #include <main.h>
 #include <motors.h>
-#include <process_image.h>
 
 //simple PI regulator implementation
 int16_t pi_regulator(float distance, float goal){

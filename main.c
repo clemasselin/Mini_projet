@@ -1,3 +1,4 @@
+#include <assess_environment.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +7,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "memory_protection.h"
-
+#include <usbcfg.h>
 #include <main.h>
 #include <motors.h>
 #include <sign_detection.h>
@@ -14,7 +15,6 @@
 #include <spi_comm.h>
 #include <camera/po8030.h>
 #include <chprintf.h>
-#include <process_image.h>
 #include <follow_line.h>
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size)
@@ -66,8 +66,10 @@ int main(void)
 
 	/* start the threads for the detection of signs and the reaction of
 	the robot in consequences with the distance sensor (IR). */
-	sign_detection_start();
-	process_image_start();
+//	sign_detection_start();
+	assess_environment_start();
+
+	if
 	follow_line_start();
 
 

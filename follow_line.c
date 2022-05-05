@@ -1,3 +1,4 @@
+#include <assess_environment.h>
 #include "ch.h"
 #include "hal.h"
 #include <math.h>
@@ -6,7 +7,6 @@
 #include <main.h>
 #include <motors.h>
 #include <follow_line.h>
-#include <process_image.h>
 
 
 
@@ -19,7 +19,7 @@ static THD_FUNCTION(FollowLine, arg) {
 
     systime_t time;
 
-    int16_t speed = 320;
+    int16_t speed = 250;
     int16_t deviation = 0;
 
     while(1){

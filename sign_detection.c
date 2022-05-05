@@ -1,6 +1,8 @@
+#include <assess_environment.h>
 #include "ch.h"
 #include "hal.h"
 #include <math.h>
+#include <usbcfg.h>
 
 
 #include <main.h>
@@ -9,6 +11,15 @@
 #include <sign_detection.h>
 #include <robot_reactions.h>
 #include <leds.h>
+#include <chprintf.h>
+
+
+//void sign_reading(){
+//	chprintf((BaseSequentialStream *)&SDU1, "line_width=%d\n", lineWidth);
+//
+//
+//}
+
 
 static THD_WORKING_AREA(waSignDetection, 256);
 static THD_FUNCTION(SignDetection, arg) {
@@ -40,6 +51,11 @@ static THD_FUNCTION(SignDetection, arg) {
         if (get_calibrated_prox(1) > 1) {
 
         	speed = 0 ;
+            right_motor_set_speed(speed);
+            left_motor_set_speed(speed);
+
+            //sign_reading();
+
 
         	/* start the selection of reactions of the robot*/
         	//warning_rgb();
@@ -70,6 +86,8 @@ static THD_FUNCTION(SignDetection, arg) {
         chThdSleepUntilWindowed(time, time + MS2ST(10));
     }
 }
+
+
 
 void sign_detection_start(void){
 	chThdCreateStatic(waSignDetection, sizeof(waSignDetection), NORMALPRIO+1, SignDetection, NULL);

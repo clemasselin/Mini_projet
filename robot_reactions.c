@@ -23,16 +23,16 @@ void warning_rgb(void){
 
 void warning(void){
 
-		set_led(LED3, 2);
-		set_led(LED7, 2);
+	set_led(LED3, 2);
+	set_led(LED7, 2);
 
 }
 
 void clear_leds_rgb(void)
 {
 
-		set_rgb_led(LED2, 0, 0, 0);
-		set_rgb_led(LED8, 0, 0, 0);
+	set_rgb_led(LED2, 0, 0, 0);
+	set_rgb_led(LED8, 0, 0, 0);
 }
 
 //void turn_signal(void){

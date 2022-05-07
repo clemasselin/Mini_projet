@@ -9,7 +9,12 @@
 
 
 
-static float distance_cm = 0;
+
+
+
+
+
+//static float distance_cm = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;//middle
 static uint8_t line_number=0;
 //semaphore
@@ -24,11 +29,11 @@ static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
 void find_line(uint8_t *buffer){
 
-	uint16_t i = 0, begin=0, end =0, width = 0;
-	uint8_t stop = 0, wrong_line = 0, line_not_found = 0, n=0;
+	uint16_t i = 0, begin=0, end =0;
+	uint8_t stop = 0, line_not_found = 0, n=0;
 	uint32_t mean = 0;
 
-	static uint16_t last_width = PXTOCM/GOAL_DISTANCE;
+	//static uint16_t last_width = PXTOCM/GOAL_DISTANCE;
 
 	//performs an average
 	for(uint16_t i = begin ; i < IMAGE_BUFFER_SIZE ; i++){
@@ -36,11 +41,13 @@ void find_line(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
+	//look for three lines
+	while(n<3){
 
 	//search for a line
-	do{
+	//do{
 
-		wrong_line = 0;
+		//wrong_line = 0;
 		//search for a begin
 		while(stop == 0 && i < (IMAGE_BUFFER_SIZE - WIDTH_SLOPE))
 		{ 
@@ -71,28 +78,30 @@ void find_line(uint8_t *buffer){
 		    if (i > IMAGE_BUFFER_SIZE || !end)
 		    {
 		        line_not_found = 1;
+		        line_number=0;
 		    }
 		}
 		else//if no begin was found
 		{
 		    line_not_found = 1;
+		    line_number=0;
 		}
 
 		//if a line too small has been detected, continues the search
-		if(!line_not_found && (end-begin) < MIN_LINE_WIDTH){
-			i = end;
-			begin = 0;
-			end = 0;
-			stop = 0;
-			wrong_line = 1;
-		}
-	}while(wrong_line ||);
+		//if(!line_not_found && (end-begin) < MIN_LINE_WIDTH){
+			//i = end;
+			//begin = 0;
+			//end = 0;
+			//stop = 0;
+			//wrong_line = 1;
+		//}
+	//}while(wrong_line);
 
 
 	if(line_not_found){
 		begin = 0;
 		end = 0;
-		width = last_width;
+		//width = last_width;
 
 
 	//if line found, get line position and continue search
@@ -110,11 +119,11 @@ void find_line(uint8_t *buffer){
 		stop = 0;
 		n+=1;
 		line_number=n;
-
+	}
 
 	}
 
-
+	line_number=0;
 
 }
 
@@ -149,7 +158,7 @@ static THD_FUNCTION(ProcessImage, arg) {
 
 	uint8_t *img_buff_ptr;
 	uint8_t image[IMAGE_BUFFER_SIZE] = {0};
-	uint16_t lineWidth = 0;
+	//uint16_t lineWidth = 0;
 
 
 
@@ -169,19 +178,9 @@ static THD_FUNCTION(ProcessImage, arg) {
 		}
 
 
+		find_line(image);
 
-
-
-			find_line()
-
-
-
-
-
-
-
-
-		chprintf((BaseSequentialStream *)&SDU1, "line_width=%d\n", line_number);
+		chprintf((BaseSequentialStream *)&SD3, "line_number=%d\r\n", line_number);
 
 		//converts the width into a distance between the robot and the camera
 		//if(lineWidth){
@@ -198,14 +197,14 @@ static THD_FUNCTION(ProcessImage, arg) {
 }
 
 
-uint16_t get_line_position(void){
+int get_line_position(void){
 	return line_position;
 }
-uint8_t get_line_number(void){
+int get_line_number(void){
 	return line_number;
 }
 
-void asses_environment_start(void){
+void assess_environment_start(void){
 	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
 	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
 }

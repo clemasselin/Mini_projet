@@ -7,13 +7,13 @@
 
 #define IMAGE_BUFFER_SIZE		640
 #define MAX_DISTANCE 			25.0f
-#define PXTOCM					1570.0f
-#define GOAL_DISTANCE 			10.0f
+//#define PXTOCM					1570.0f
+//#define GOAL_DISTANCE 			10.0f
 #define MIN_LINE_WIDTH			40
 #define WIDTH_SLOPE				5
 #define ROTATION_THRESHOLD		5
 #define ROTATION_COEFF			2
-#define DEFAULT_SPEED			300
+#define DEFAULT_MOVING_SPEED			300
 void delay(unsigned int n);
 void SendUint8ToComputer(uint8_t* data, uint16_t size);
 

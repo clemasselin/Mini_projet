@@ -10,6 +10,7 @@
 
 
 void follow_line_start(void);
+int16_t pi_regulator(void);
 
 
 #endif /* FOLLOW_LINE_H_ */

@@ -59,7 +59,8 @@ static THD_FUNCTION(SignDetection, arg) {
 
         	/* start the selection of reactions of the robot*/
         	//warning_rgb();
-        	warning();
+
+
 
         	/* waits 0.1 second */
         	chThdSleepMilliseconds(100);

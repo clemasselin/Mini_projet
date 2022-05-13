@@ -1,9 +1,7 @@
-#include <assess_environment.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
 
 #include "ch.h"
 #include "hal.h"
@@ -17,6 +15,7 @@
 #include <camera/po8030.h>
 #include <chprintf.h>
 #include <follow_line.h>
+#include <assess_environment.h>
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size)
 {
@@ -53,14 +52,14 @@ int main(void)
     //start the USB communication
     usb_start();
     //starts the camera
-   // dcmi_start();
-	//po8030_start();
+    dcmi_start();
+	po8030_start();
 
     /* inits the spi communication bus. */
     spi_comm_start();
 
     /* inits the motors. */
-	//motors_init();
+	motors_init();
 
 	/* Inits the Inter Process Communication bus. */
 	messagebus_init(&bus, &bus_lock, &bus_condvar);
@@ -68,11 +67,12 @@ int main(void)
 	/* start the threads for the detection of signs and the reaction of
 	the robot in consequences with the distance sensor (IR). */
 //	sign_detection_start();
-	//assess_environment_start();
 	//follow_line_start();
-	int nb =2;
+	assess_environment_start();
+	follow_line_start();
 
-	chprintf((BaseSequentialStream *)&SDU1, "hello=%d\r\n", nb);
+
+
 
 
     /* Infinite loop. */

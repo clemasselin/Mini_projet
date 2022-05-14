@@ -32,21 +32,16 @@ static THD_FUNCTION(FollowLine, arg) {
 
     while(1){
         time = chVTGetSystemTime();
-        //right_motor_set_speed(speed);
-       // left_motor_set_speed(speed);
-        //
 
-        //chprintf((BaseSequentialStream *)&SDU1, "line_number=%d\r\n", process_line_number());
 
       // chprintf((BaseSequentialStream *)&SDU1, "signal=%d\r\n", get_detection_state());
 
 
-//     //uint16_t n=get_line_number();
+
         if(get_initialized()){
         	if(!get_detection_state()){
         	switch(get_line_number()){
-////       // chprintf((BaseSequentialStream *)&SDU1, "line=%d\r\n", get_line_number());
-////
+
            case 1:
             clear_leds();
 
@@ -58,8 +53,7 @@ static THD_FUNCTION(FollowLine, arg) {
           	left_motor_set_speed(speed + ROTATION_COEFF * deviation);
 
               break;
-//
-//
+
            case 2:
            	set_led(LED7, 2);
 
@@ -69,23 +63,22 @@ static THD_FUNCTION(FollowLine, arg) {
 //            	//right_motor_set_speed(speed - SPEED_CORRECTION);
 //            //	left_motor_set_speed(speed + SPEED_CORRECTION );
 //            }
-//////
-//////            	right_motor_set_speed(0);
-//////            	left_motor_set_speed(0);
-//////            	chThdSleepMilliseconds(3000);
-//////            	while(get_line_number()!=1){
-//////            		right_motor_set_speed(speed - SPEED_CORRECTION);
-//////            		left_motor_set_speed(speed +SPEED_CORRECTION );
-//////            	}
-//////            	right_motor_set_speed(0);
-//////            	left_motor_set_speed(0);
-//////
+//
+//           	right_motor_set_speed(0);
+//         	left_motor_set_speed(0);
+//           	chThdSleepMilliseconds(3000);
+//          	while(get_line_number()!=1){
+//           		right_motor_set_speed(speed - SPEED_CORRECTION);
+//           		left_motor_set_speed(speed +SPEED_CORRECTION );
+//         	}
+//          	right_motor_set_speed(0);
+//          	left_motor_set_speed(0);
+//
               break;
-//////
-//////
+
            case 3:
 
-//////               set_led(LED3, 2);
+//               set_led(LED3, 2);
               right_motor_set_speed(0);
               left_motor_set_speed(0);
               chThdSleepMilliseconds(3000);
@@ -94,12 +87,7 @@ static THD_FUNCTION(FollowLine, arg) {
               left_motor_set_speed(speed);
               }
              break;
-////
-////
-////
-////            default:
-////            	set_body_led(1);
-//
+
        }
         	}
         	else{
@@ -108,20 +96,6 @@ static THD_FUNCTION(FollowLine, arg) {
 
         	}
         }
-
-
-
-
-
-//       if(deviation>DEV_TRESHOLD){
-//
-//        left_motor_set_speed(speed + ROTATION_COEFF * deviation);
-//        right_motor_set_speed(speed - ROTATION_COEFF * deviation);
-//        }
-//        if(deviation<-DEV_TRESHOLD){
-//        left_motor_set_speed(speed - ROTATION_COEFF * deviation);
-//		right_motor_set_speed(speed + ROTATION_COEFF * deviation);
-//       }
 
 
         //100Hz

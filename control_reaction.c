@@ -43,6 +43,7 @@ static THD_FUNCTION(FollowLine, arg) {
 
 //     //uint16_t n=get_line_number();
         if(get_initialized()){
+        	if(!get_detection_state()){
         	switch(get_line_number()){
 ////       // chprintf((BaseSequentialStream *)&SDU1, "line=%d\r\n", get_line_number());
 ////
@@ -100,6 +101,12 @@ static THD_FUNCTION(FollowLine, arg) {
 ////            	set_body_led(1);
 //
        }
+        	}
+        	else{
+        		 right_motor_set_speed(0);
+        		 left_motor_set_speed(0);
+
+        	}
         }
 
 

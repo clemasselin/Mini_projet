@@ -12,6 +12,7 @@ GLOBAL_PATH = ../../lib/e-puck2_main-processor
 CSRC += ./main.c \
 		./assess_environment.c \
 		./follow_line.c \		
+
 		
 
 #Header folders to include

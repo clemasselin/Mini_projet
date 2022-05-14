@@ -5,6 +5,7 @@
 #include "msgbus/messagebus.h"
 #include "parameter/parameter.h"
 
+#define SPEED_CORRECTION		100
 #define IMAGE_BUFFER_SIZE		640
 #define MAX_DISTANCE 			25.0f
 #define PXTOCM					1570.0f

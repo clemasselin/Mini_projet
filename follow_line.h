@@ -10,8 +10,8 @@
 
 
 void follow_line_start(void);
-int16_t pi_regulator(float pos);
-//int process_line_number(void);
+void motor_set_position(float position_r, float position_l, float speed_r, float speed_l);
+
 
 
 #endif /* FOLLOW_LINE_H_ */

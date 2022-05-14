@@ -210,7 +210,7 @@ void initialisation(void){
 	 set_rgb_led(LED6, ZERO, ZERO, ZERO);
 	 set_rgb_led(LED8, ZERO, ZERO, ZERO);
 
-	 detection_state = NONE;
+	// detection_state = NONE;
 	 initialized=1;
 }
 

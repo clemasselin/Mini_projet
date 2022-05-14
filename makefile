@@ -12,7 +12,7 @@ GLOBAL_PATH = ../../lib/e-puck2_main-processor
 CSRC += ./main.c \
 		./assess_environment.c \
 		./control_reaction.c \
-		
+		./sign_detection.c \
 		
 		
 		

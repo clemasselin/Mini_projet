@@ -18,7 +18,7 @@
 
 #include <control_reaction.h>
 #include <assess_environment.h>
-//#include <sign_detection.h>
+#include <sign_detection.h>
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size)
 {
@@ -71,7 +71,7 @@ int main(void)
 	the robot in consequences with the distance sensor (IR). */
 	//sign_detection_start();
 	//follow_line_start();
-	//sign_detection_start();
+	sign_detection_start();
 	assess_environment_start();
 	control_reaction_start();
 

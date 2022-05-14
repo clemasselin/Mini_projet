@@ -42,7 +42,8 @@ static THD_FUNCTION(FollowLine, arg) {
 
 
 //     //uint16_t n=get_line_number();
-      switch(get_line_number()){
+        if(get_initialized()){
+        	switch(get_line_number()){
 ////       // chprintf((BaseSequentialStream *)&SDU1, "line=%d\r\n", get_line_number());
 ////
            case 1:
@@ -99,6 +100,7 @@ static THD_FUNCTION(FollowLine, arg) {
 ////            	set_body_led(1);
 //
        }
+        }
 
 
 

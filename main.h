@@ -2,6 +2,16 @@
 #define MAIN_H
 
 
+//#define IMAGE_BUFFER_SIZE 1000
+//#define ROTATION_THRESHOLD 1000
+//#define ROTATION_COEFF 1000
+//#define PXTOCM 1000
+//#define GOAL_DISTANCE 1000
+//#define WIDTH_SLOPE 1000
+//#define MIN_LINE_WIDTH 1000
+//#define MAX_DISTANCE 1000
+
+
 void delay(unsigned int n);
 
 #ifdef __cplusplus

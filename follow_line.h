@@ -8,7 +8,6 @@
 #ifndef FOLLOW_LINE_H_
 #define FOLLOW_LINE_H_
 
-
 void follow_line_start(void);
 
 

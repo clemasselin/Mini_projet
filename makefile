@@ -14,6 +14,7 @@ CSRC += ./main.c \
 		./process_image.c \
 		./sign_detection.c \
 		./robot_reactions.c \
+		
 #Header folders to include
 INCDIR += 
 

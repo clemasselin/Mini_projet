@@ -13,6 +13,7 @@ CSRC += ./main.c \
 		./assess_environment.c \
 		./control_reaction.c \
 		./sign_detection.c \
+		./robot_reactions.c \
 		
 		
 		

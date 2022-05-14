@@ -17,8 +17,52 @@ static bool direction_statut = true;
 static int turning_instruction_state = 0;
 static int detection_state = NONE;
 static bool initialized = 0;
+static int calibration = 0;
+
+void signal_detection(){
+    int counter_leds_delay = LEDS_DELAY;
+    int counter_motors_delay = MOTORS_DELAY;
+    int keep_running_delay = ZERO;
+
+	        if (detection_state == RIGHT){
 
 
+	        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
+
+	        	/* Update the variables used to turn for a right turn */
+	        	direction_statut = true;
+	        	turning_instruction_state = RIGHT;
+
+	        	/* waits 0.4 second */
+	        	chThdSleepMilliseconds(400);
+
+	        }else if(detection_state == LEFT){
+
+
+	        	detection_state = true;
+
+	        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
+
+	        	/* Update the variables used to turn for a left turn */
+	        	direction_statut = false;
+	        	turning_instruction_state = LEFT;
+
+
+	        	chThdSleepMilliseconds(400);
+
+	        }else{
+
+
+	        	detection_state = false;
+
+	        	/* Force the robot to continue along the line while it detects a sign */
+	        	keep_running();
+
+	        	/* Update the variable used to turn for no turn detected */
+	        	turning_instruction_state = NONE;
+	        }
+
+}
 
 static THD_WORKING_AREA(waSignDetection, 256);
 static THD_FUNCTION(SignDetection, arg) {
@@ -39,11 +83,8 @@ static THD_FUNCTION(SignDetection, arg) {
 
     systime_t time;
 
-    /* Declaration of local variables */
-    int counter_leds_delay = LEDS_DELAY;
-    int counter_motors_delay = MOTORS_DELAY;
-    int keep_running_delay = ZERO;
-    int calibration = get_prox(3);
+
+    calibration = get_prox(3);
 
 
 
@@ -63,46 +104,6 @@ static THD_FUNCTION(SignDetection, arg) {
 
         detected(calibration);
 
-//        if (detection_state == RIGHT){
-//
-//        	chprintf((BaseSequentialStream *)&SD3, "detection_state=%d\r\n", detection_state);
-//
-//        	/* Call the functions that force the robot to go again by ignoring the sign detection until it passe the sign and then turn
-//        	 *  in the direction wanted until the line research thread take the lead again*/
-//        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
-//
-//        	/* Update the variables used to turn for a right turn */
-//        	direction_statut = true;
-//        	turning_instruction_state = RIGHT;
-//
-//        	/* waits 0.4 second */
-//        	chThdSleepMilliseconds(400);
-//
-//        }else if(detection_state == LEFT){
-//
-//        	chprintf((BaseSequentialStream *)&SD3, "detection_state=%d\r\n", detection_state);
-//        	detection_state = true;
-//
-//        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
-//
-//        	/* Update the variables used to turn for a left turn */
-//        	direction_statut = false;
-//        	turning_instruction_state = LEFT;
-//
-//
-//        	chThdSleepMilliseconds(400);
-//
-//        }else{
-//        	chprintf((BaseSequentialStream *)&SD3, "detection_state=%d\r\n", detection_state);
-//
-//        	detection_state = false;
-//
-//        	/* Force the robot to continue along the line while it detects a sign */
-//        	keep_running();
-//
-//        	/* Update the variable used to turn for no turn detected */
-//        	turning_instruction_state = NONE;
-//        }
 
         /* 100Hz */
         chThdSleepUntilWindowed(time, time + MS2ST(5));
@@ -114,7 +115,7 @@ static THD_FUNCTION(SignDetection, arg) {
 
 /* Sign detection thread starter */
 void sign_detection_start(void){
-	chThdCreateStatic(waSignDetection, sizeof(waSignDetection), NORMALPRIO+1, SignDetection, NULL);
+	chThdCreateStatic(waSignDetection, sizeof(waSignDetection), NORMALPRIO-1, SignDetection, NULL);
 }
 
 

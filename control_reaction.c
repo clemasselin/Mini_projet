@@ -91,8 +91,9 @@ static THD_FUNCTION(FollowLine, arg) {
        }
         	}
         	else{
-        		 right_motor_set_speed(0);
-        		 left_motor_set_speed(0);
+        		// right_motor_set_speed(0);
+        		 //left_motor_set_speed(0);
+        		signal_detection();
 
         	}
         }

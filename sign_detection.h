@@ -12,4 +12,5 @@ int delay_leds_toggle(int counter_leds_delay);
 void initialisation(void);
 int get_detection_state(void);
 bool get_initialized(void);
+void signal_detection();
 #endif /* SIGN_DETECTION_H */

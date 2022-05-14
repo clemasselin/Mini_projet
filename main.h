@@ -19,6 +19,16 @@
 #define KP						800.0f
 #define KI 						3.5f	//must not be zero
 #define MAX_SUM_ERROR 			(MOTOR_SPEED_LIMIT/KI)
+
+
+#define ZERO 0
+#define LEDS_DELAY 5
+#define MOTORS_DELAY 5
+#define RUNNING_DELAY 1
+#define RIGHT 1
+#define LEFT 2
+#define NONE 0
+
 void delay(unsigned int n);
 void SendUint8ToComputer(uint8_t* data, uint16_t size);
 

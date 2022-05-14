@@ -93,12 +93,15 @@ void find_line(uint8_t *buffer){
 		}
 
 		if(!line_not_found){
-
+			//set_led(LED3, 2);
+			//set_body_led(1);
+			//chprintf((BaseSequentialStream *)&SDU1, "pos=%d\r\n", (begin + end)/2);
 			if((end-begin) >MIN_LINE_WIDTH){
 				n+=1;
 				line_number=n;
 				if(n==1){
 					line_position=(begin + end)/2;
+					//chprintf((BaseSequentialStream *)&SDU1, "posi=%d\r\n", get_line_position());
 				}
 			}
 
@@ -107,8 +110,18 @@ void find_line(uint8_t *buffer){
 			end = 0;
 			stop=0;
 			continue_search = 1;
+
+
+			//chprintf((BaseSequentialStream *)&SDU1, "pos=%d\r\n", line_position);
+			//chprintf((BaseSequentialStream *)&SDU1, "line=%d\r\n", n);
+
+
+
 		}
 
+
+		//&& (end-begin) < MIN_LINE_WIDTH
+	//}while(next_scan && n<3 );
 }while(continue_search);
 
 
@@ -339,8 +352,11 @@ static THD_FUNCTION(ProcessImage, arg) {
 uint16_t get_line_position(void){
 	return line_position;
 }
-uint16_t get_line_number(void){
+int get_line_number(void){
 	return line_number;
+}
+void set_line_number(int value){
+	line_number=value;
 }
 
 void assess_environment_start(void){

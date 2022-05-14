@@ -1,21 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+
 
 #include "ch.h"
 #include "hal.h"
 #include "memory_protection.h"
 #include <usbcfg.h>
 #include <main.h>
+#include <chprintf.h>
 #include <motors.h>
-#include <sign_detection.h>
+
 #include <msgbus/messagebus.h>
 #include <spi_comm.h>
 #include <camera/po8030.h>
-#include <chprintf.h>
-#include <follow_line.h>
+
+
+#include <control_reaction.h>
 #include <assess_environment.h>
+//#include <sign_detection.h>
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size)
 {
@@ -66,10 +69,12 @@ int main(void)
 
 	/* start the threads for the detection of signs and the reaction of
 	the robot in consequences with the distance sensor (IR). */
-//	sign_detection_start();
+	//sign_detection_start();
 	//follow_line_start();
+	//sign_detection_start();
 	assess_environment_start();
-	follow_line_start();
+	control_reaction_start();
+
 
 
 

@@ -24,43 +24,58 @@ void signal_detection(){
     int counter_motors_delay = MOTORS_DELAY;
     int keep_running_delay = ZERO;
 
-	        if (detection_state == RIGHT){
+
+    right_motor_set_speed(0);
+    left_motor_set_speed(0);
+    set_body_led(1);
+    chThdSleepMilliseconds(400);
+    set_body_led(0);
 
 
-	        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
+ if (detection_state == RIGHT){
+	   right_motor_set_speed(0);
+	    left_motor_set_speed(0);
+	    set_body_led(1);
+	    chThdSleepMilliseconds(400);
+	    set_body_led(0);
 
-	        	/* Update the variables used to turn for a right turn */
-	        	direction_statut = true;
-	        	turning_instruction_state = RIGHT;
-
-	        	/* waits 0.4 second */
-	        	chThdSleepMilliseconds(400);
-
-	        }else if(detection_state == LEFT){
-
-
-	        	detection_state = true;
-
-	        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
-
-	        	/* Update the variables used to turn for a left turn */
-	        	direction_statut = false;
-	        	turning_instruction_state = LEFT;
-
-
-	        	chThdSleepMilliseconds(400);
-
-	        }else{
-
-
-	        	detection_state = false;
-
-	        	/* Force the robot to continue along the line while it detects a sign */
-	        	keep_running();
-
-	        	/* Update the variable used to turn for no turn detected */
-	        	turning_instruction_state = NONE;
-	        }
+ }
+//
+//
+//	        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
+//
+//	        	/* Update the variables used to turn for a right turn */
+//	        	direction_statut = true;
+//	        	turning_instruction_state = RIGHT;
+//
+//	        	/* waits 0.4 second */
+//	        	chThdSleepMilliseconds(400);
+//
+//	        }else if(detection_state == LEFT){
+//
+//
+//	        	detection_state = true;
+//
+//	        	counter_motors_delay = avoid_sign(counter_motors_delay, counter_leds_delay, keep_running_delay, calibration);
+//
+//	        	/* Update the variables used to turn for a left turn */
+//	        	direction_statut = false;
+//	        	turning_instruction_state = LEFT;
+//
+//
+//	        	chThdSleepMilliseconds(400);
+//
+//	        }else{
+//
+//
+//	        	detection_state = false;
+//
+//	        	/* Force the robot to continue along the line while it detects a sign */
+//	        	keep_running();
+//
+//	        	/* Update the variable used to turn for no turn detected */
+//	        	turning_instruction_state = NONE;
+//	        }
 
 }
 

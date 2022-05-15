@@ -43,6 +43,17 @@ messagebus_t bus;
 MUTEX_DECL(bus_lock);
 CONDVAR_DECL(bus_condvar);
 
+static void serial_start(void)
+{
+	static SerialConfig ser_cfg = {
+	    115200,
+	    0,
+	    0,
+	    0,
+	};
+
+	sdStart(&SD3, &ser_cfg); // UART3.
+}
 
 int main(void)
 {
@@ -61,6 +72,9 @@ int main(void)
     /* inits the spi communication bus. */
     spi_comm_start();
 
+    /* inits the serial for UART. */
+    serial_start();
+
     /* inits the motors. */
 	motors_init();
 
@@ -74,7 +88,6 @@ int main(void)
 	sign_detection_start();
 	assess_environment_start();
 	control_reaction_start();
-
 
 
 

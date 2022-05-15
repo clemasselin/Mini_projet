@@ -24,20 +24,26 @@ void signal_detection(){
     int counter_motors_delay = MOTORS_DELAY;
     int keep_running_delay = ZERO;
 
-
-    right_motor_set_speed(0);
-    left_motor_set_speed(0);
-    set_body_led(1);
-    chThdSleepMilliseconds(400);
-    set_body_led(0);
+//
+//    right_motor_set_speed(0);
+//    left_motor_set_speed(0);
+//    set_body_led(1);
+//    chThdSleepMilliseconds(400);
+//    set_body_led(0);
 
 
  if (detection_state == RIGHT){
-	   right_motor_set_speed(0);
-	    left_motor_set_speed(0);
-	    set_body_led(1);
-	    chThdSleepMilliseconds(400);
-	    set_body_led(0);
+	   // right_motor_set_speed(0);
+	   // left_motor_set_speed(0);
+	  //  set_body_led(1);
+	   // chThdSleepMilliseconds(400);
+	   // set_body_led(0);
+	 right_motor_set_speed(250 - SPEED_CORRECTION);
+    left_motor_set_speed(250 +SPEED_CORRECTION );
+
+ }else{
+	right_motor_set_speed(250 + SPEED_CORRECTION);
+    left_motor_set_speed(250 -SPEED_CORRECTION );
 
  }
 //

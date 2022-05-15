@@ -12,12 +12,7 @@ CSRC += ./main.c \
 		./control_pannel.c \
 		./sign_detection.c \
 		./circulation_instructions.c \
-		
-		
-		
-		
-
-		
+	
 
 #Header folders to include
 INCDIR += 
